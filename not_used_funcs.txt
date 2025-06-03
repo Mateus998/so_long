@@ -1,0 +1,31 @@
+
+
+
+
+char **create_matrix(int fd)
+{
+    char **matrix;
+    int bytes_read;
+    char *read_buff;
+    char *line_map;
+
+    read_buff = malloc(51);
+    if(!read_buff)
+        error_exit("read_buff alocation error");
+    bytes_read = read(fd, read_buff, 50);
+    while (bytes_read)
+    {
+        read_buff[bytes_read] = '\0';
+        if (ft_strjoin_gnl(&line_map, read_buff) == -1)
+        {
+            free(line_map);    
+            error_exit("error read process");
+        }
+        bytes_read = read(fd, read_buff, 50);
+    }
+    free(read_buff);
+    matrix = ft_split(line_map, '\n');
+    if (!matrix)
+        error_exit("error matrix creation");
+    return (matrix);
+}
