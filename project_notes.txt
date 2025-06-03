@@ -1,1 +1,66 @@
-1. validacao do input map
+1. Parsing do Mapa
+
+    Ler o arquivo .ber.
+
+    Validar:
+
+        Formato retangular.
+
+        Apenas caracteres válidos.
+
+        Um único jogador (P), ao menos uma saída (E) e coletáveis (C).
+
+        Mapa cercado por paredes (1).
+
+        Solução viável (jogador consegue pegar tudo e chegar ao fim).
+
+2. Representação do Jogo
+
+    Matriz de char para o mapa.
+
+    Estrutura com:
+
+        Posição do jogador.
+
+        Quantidade de coletáveis restantes.
+
+        Contador de movimentos.
+
+3. Renderização com MLX
+
+    Uma janela onde cada célula do mapa vira uma imagem:
+
+        1 → parede
+
+        0 → chão
+
+        P → jogador
+
+        C → coletável
+
+        E → saída
+
+4. Eventos do Teclado
+
+    Mover o jogador: W, A, S, D
+
+    Fechar o jogo: ESC ou clicar no X
+
+5. Lógica do jogo
+
+    Se o jogador pisa em C → coleta.
+
+    Se pisa em E e já pegou tudo → vitória.
+
+    Mostrar quantidade de movimentos (no terminal ou na tela).
+
+main minilibx functions to use
+
+mlx_init();
+mlx_new_window();
+mlx_xpm_file_to_image();
+mlx_put_image_to_window();
+mlx_key_hook() ou mlx_hook();
+mlx_loop();
+mlx_destroy_window();
+mlx_destroy_image();
