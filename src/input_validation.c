@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 11:58:49 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/04 16:59:13 by mateferr         ###   ########.fr       */
+/*   Created: 2025/06/03 11:13:15 by mateferr          #+#    #+#             */
+/*   Updated: 2025/06/04 16:55:56 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-int	main(int c, char **v)
+void	input_validation(char *map)
 {
-	if (c != 2)
-		error_exit("more/less then one parameter");
-	input_validation(v[1]);
-	ft_printf("pass\n");
-	exit(0);
+	int		fd;
+	char	**mtrx;
+	int		size;
+
+	mtrx = NULL;
+	size = line_count(map);
+	if (size < 3)
+		error_exit("map to small");
+	fd = open(map, O_RDONLY);
+	create_matrix(fd, size, mtrx);
+	close(fd);
 }
-// remontar input validation
