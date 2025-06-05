@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:15 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/05 17:22:36 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/05 23:08:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void map_char_check(char *map)
 	int i;
 
 	line = NULL;
-	i = 0;
 	while(file_reading(map, &line))
 	{
+		i = 0;
 		while(line[i])
 		{
 			if (line[i] != '0' && line[i] != '1' && line[i] != '\n')
@@ -113,14 +113,53 @@ void map_char_check(char *map)
 	}
 }
 
+char **matrix_creation(char *map)
+{
+	char **mtx;
+	int i;
+	char *line;
+	int size;
+	
+	mtx = NULL;
+	size = line_count(map);
+	mtx = (char **)malloc(size + 1);
+	if (!mtx)
+		error_exit("matrix allocation fail");
+	i = 0;
+	line = NULL;
+	while(file_reading(map, &line))
+	{
+		size = sl_strlen(line);
+		mtx[i] = (char *)malloc(size + 1);
+		if (!mtx[i])
+		{
+			free_matrix(mtx);
+			free_get_next_line(map, line);
+			error_exit("matrix line allocation fail");
+		}
+		ft_strlcpy(mtx[i], line, size + 1);
+		i++;
+	}
+	mtx[i] = NULL;
+	return (mtx);
+}
+
 void	input_validation(char *map)
 {
 	int total_lines;
-
+	char **matrix;
 	
 	map_char_check(map);
 	format_check(map);
 	total_lines = line_count(map);
 	walls_check(map, total_lines);
-	// matrix_creation(map);
+	matrix = matrix_creation(map); //do printfs
+	if (matrix)
+		printf("\n");
+	// while(*matrix)
+	// {
+	// 	printf("%s\n", *matrix);
+	// 	matrix++;
+	// }
+	//valid_path_check(matrix);
 }

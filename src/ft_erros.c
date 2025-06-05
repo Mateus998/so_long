@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:35:02 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/05 15:15:24 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/05 22:54:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ int	free_get_next_line(char *map, char *line)
 	return (1);
 }
 
-// void	free_matrix(char **mtrx)
-// {
-// 	if (mtrx)
-// 	{
-// 		while (*mtrx)
-// 		{
-// 			free(*mtrx);
-// 			mtrx++;
-// 		}
-// 		free(mtrx);
-// 	}
-// }
+void	free_matrix(char **mtrx)
+{
+	if (mtrx)
+	{
+		while (*mtrx)
+		{
+			free(*mtrx);
+			mtrx++;
+		}
+		free(mtrx);
+	}
+	*mtrx = NULL;
+}
