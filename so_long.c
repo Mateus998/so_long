@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:58:49 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/04 16:59:13 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:52:44 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int	main(int c, char **v)
 {
+	t_slong	*game;
+
 	if (c != 2)
 		error_exit("more/less then one parameter");
-	input_validation(v[1]);
-	ft_printf("pass\n");
+	game = input_validation(v[1]);
+	// window and game...
+	printf("PASS\n");
+	free_matrix(game->map);
+	free(game);
 	exit(0);
 }
-// remontar input validation

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_erros.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:35:02 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/05 22:54:25 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/06 18:18:16 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
-// void free_all_exit(char *gnl, char **mtrx, int fd, char *msg)
-// {
-// 	if (gnl)
-// 		free_get_next_line(fd, gnl);
-// 	if (mtrx)
-// 		free_matrix(mtrx);
-// 	if (fd)
-// 		close (fd);
-// 	if (msg)
-// 		ft_putendl_fd(msg, 2);
-// 	exit(1);
-// }
-
 int	free_get_next_line(char *map, char *line)
 {
 	file_reading(map, &line);
@@ -40,16 +27,28 @@ int	free_get_next_line(char *map, char *line)
 	return (1);
 }
 
-void	free_matrix(char **mtrx)
+int	free_matrix(char **mtrx)
 {
+	int i;
+
+	i = 0;
 	if (mtrx)
 	{
-		while (*mtrx)
+		while (mtrx[i])
 		{
-			free(*mtrx);
-			mtrx++;
+			free(mtrx[i]);
+			i++;
 		}
 		free(mtrx);
+		mtrx = NULL;
 	}
-	*mtrx = NULL;
+	return (1);
+}
+
+int free_game(t_slong *game)
+{
+	if (game->map)
+		free_matrix(game->map);
+	free(game);
+	return (1);
 }

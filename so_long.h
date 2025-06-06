@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/05 22:53:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/06 18:55:52 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,36 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+
+typedef struct s_slong
+{
+	char	**map;
+	int		collect;
+	int		playerx;
+	int		playery;
+}			t_slong;
+
 // errors
-void	error_exit(char *msg);
-// void free_all_exit(char *gnl, char **mtrx, int fd, char *msg);
-int	free_get_next_line(char *map, char *line);
-void	free_matrix(char **mtrx);
+void		error_exit(char *msg);
+int			free_get_next_line(char *map, char *line);
+int			free_matrix(char **mtrx);
+int			free_game(t_slong *game);
 
 // input
-void	input_validation(char *map);
-int file_reading(char *map, char **line);
-void format_check(char *map);
-int sl_strlen(char *str);
-// int		char_count_check(char **mtrx);
-// void		create_matrix(int fd, int size, char **matrix);
-// int		chr_check(char *l);
-// int		line_check(char *line, int size, int idx);
-int		line_count(char *map);
+t_slong		*input_validation(char *map);
+int			file_reading(char *map, char **line);
+void		format_check(char *map);
+int			sl_strlen(char *str);
+int			line_count(char *map);
+char		**matrix_creation(char *map);
+void		top_bottom_walls(char *map, char *line);
+void		walls_check(char *map, int total_lines);
+char		*player_exit_count(char c);
+void		map_char_check(char *map);
+char		**copy_matrix(char **mtx, int size);
+int			flood_fill_check(char **mtx, int y, int x, int collect);
+void		player_position(t_slong *game);
+void		collectibles_count(t_slong *game);
+void		valid_path_check(t_slong *game, int size);
 
 #endif
