@@ -19,6 +19,24 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
+void free_map(t_slong *map, char *msg)
+{
+	free_matrix(map->map);
+	free(map);
+	error_exit(msg);
+}
+
+void free_game(t_game *game, char *msg)
+{
+	t_slong *map;
+
+	map = game->map;
+	free_matrix(map->map);
+	free(map);
+	free(game);
+	error_exit(msg);
+}
+
 int	free_get_next_line(char *map, char *line)
 {
 	file_reading(map, &line);
@@ -42,13 +60,5 @@ int	free_matrix(char **mtrx)
 		free(mtrx);
 		mtrx = NULL;
 	}
-	return (1);
-}
-
-int free_game(t_slong *game)
-{
-	if (game->map)
-		free_matrix(game->map);
-	free(game);
 	return (1);
 }

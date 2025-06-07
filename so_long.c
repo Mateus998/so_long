@@ -19,7 +19,7 @@ int	main(int c, char **v)
 	if (c != 2)
 		error_exit("more/less then one parameter");
 	game = input_validation(v[1]);
-	// window and game...
+	begin_game(game);
 	printf("PASS\n");
 	free_matrix(game->map);
 	free(game);

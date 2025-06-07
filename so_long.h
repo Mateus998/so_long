@@ -14,6 +14,8 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include "minilibx/mlx.h"
+# include "minilibx/mlx_int.h"
 
 typedef struct s_slong
 {
@@ -23,11 +25,27 @@ typedef struct s_slong
 	int		playery;
 }			t_slong;
 
+typedef struct s_game
+{
+	struct s_long	*map;
+	void *init;
+	void *window;
+	void *img_floor;
+	void *img_wall;
+	void *img_collect;
+	void *img_exit;
+	void *img_player;
+}			t_game;
+
+// game
+void begin_game(t_slong *game);
+
 // errors
 void		error_exit(char *msg);
 int			free_get_next_line(char *map, char *line);
 int			free_matrix(char **mtrx);
-int			free_game(t_slong *game);
+void free_game(t_game *game, char *msg);
+void free_map(t_slong *map, char *msg);
 
 // input
 t_slong		*input_validation(char *map);

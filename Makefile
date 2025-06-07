@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME = so_long
+MINILIBX = minilibx
 
 SRC = so_long.c \
 src/input_validation.c src/ft_erros.c src/input_val_utils.c \
@@ -24,7 +25,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C libft all
-	$(MAKE) -C minilibx-linux all
+	$(MAKE) -C $(MINILIBX) all
 	$(CC) $(CFLAGS) $(OBJ) -Llibft -lft -o $(NAME)
 
 %.o: %.c
@@ -32,7 +33,7 @@ $(NAME): $(OBJ)
 
 clean:
 	$(MAKE) -C libft clean
-	$(MAKE) -C minilibx-linux clean
+	$(MAKE) -C $(MINILIBX) clean
 	rm -f $(OBJ)
 
 fclean: clean
