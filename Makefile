@@ -14,8 +14,10 @@ NAME = so_long
 MINILIBX = minilibx
 
 SRC = so_long.c \
-src/input_validation.c src/ft_erros.c src/input_val_utils.c \
-src/input_val_utils2.c
+src/ft_erros.c \
+src/input/input_validation.c src/input/input_val_utils.c \
+src/input/input_val_utils2.c \
+src/begin_game.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
@@ -25,15 +27,15 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C libft all
-	$(MAKE) -C $(MINILIBX) all
-	$(CC) $(CFLAGS) $(OBJ) -Llibft -lft -o $(NAME)
+	$(MAKE) -C minilibx -f Makefile.mk
+	$(CC) $(CFLAGS) $(OBJ) -Llibft -lft -Lminilibx -lmlx -lXext -lX11 -lm -lbsd -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(MAKE) -C libft clean
-	$(MAKE) -C $(MINILIBX) clean
+	$(MAKE) -C minilibx -f Makefile.mk clean
 	rm -f $(OBJ)
 
 fclean: clean

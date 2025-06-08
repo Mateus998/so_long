@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 int	flood_fill_check(char **mtx, int y, int x, int collect)
 {
@@ -91,26 +91,23 @@ void	valid_path_check(t_slong *game, int size)
 	collectibles_count(game);
 	if (!flood_fill_check(mtx_cpy, game->playery, game->playerx, game->collect))
 		if (free_matrix(mtx_cpy))
-			if (free_game(game))
-				error_exit("no valid path");
+			free_map(game, "no valid path");
 	free_matrix(mtx_cpy);
 }
 
 t_slong	*input_validation(char *map)
 {
-	char	**matrix;
 	t_slong	*game;
-	int		total_lines;
 
 	map_char_check(map);
 	format_check(map);
-	total_lines = line_count(map);
-	walls_check(map, total_lines);
-	matrix = matrix_creation(map);
 	game = malloc(sizeof(t_slong));
 	if (!game)
 		error_exit("game struct allocation error");
-	game->map = matrix;
-	valid_path_check(game, total_lines);
+	game->height = line_count(map);
+	walls_check(map, game->height);
+	game->map = matrix_creation(map);
+	valid_path_check(game, game->height);
+	game->width = sl_strlen(game->map[0]);
 	return (game);
 }

@@ -21,7 +21,6 @@ int	main(int c, char **v)
 	game = input_validation(v[1]);
 	begin_game(game);
 	printf("PASS\n");
-	free_matrix(game->map);
-	free(game);
 	exit(0);
 }
+// player e movimentacao
