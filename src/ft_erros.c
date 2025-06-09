@@ -28,14 +28,15 @@ void free_map(t_slong *map, char *msg)
 
 void free_game(t_game *game, char *msg, int error)
 {
-	t_slong *map;
-
-	map = game->map;
-	free_matrix(map->map);
-	free(map);
+	if (game->map)
+		free_matrix(game->map->map);
+	free(game->map);
+	if (game->win)
+		free(game->win);
 	free(game);
 	if (error)
 		error_exit(msg);
+	exit(0);
 }
 
 int	free_get_next_line(char *map, char *line)

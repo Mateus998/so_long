@@ -23,4 +23,4 @@ int	main(int c, char **v)
 	printf("PASS\n");
 	exit(0);
 }
-// player e movimentacao
+// movimentacao

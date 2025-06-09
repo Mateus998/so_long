@@ -27,20 +27,41 @@ typedef struct s_slong
 	int height;
 }			t_slong;
 
+typedef struct s_win
+{
+	void *floor;
+	void *wall;
+	void *collect;
+	void *portal_on;
+	void *portal_off;
+	void *portal_p;
+	void *player;
+} t_win;
+
 typedef struct s_game
 {
 	struct s_slong	*map;
+	struct s_win *win;
 	void *init;
 	void *window;
-	void *img_floor;
-	void *img_wall;
-	void *img_collect;
-	void *img_exit;
-	void *img_player;
 }			t_game;
 
 // game
 void begin_game(t_slong *game);
+
+// window
+void render_image(t_game *game);
+void file_to_image(t_game *game);
+
+// moves
+void move_up(t_game *game);
+void move_down(t_game *game);
+void move_left(t_game *game);
+void move_right(t_game *game);
+
+// controls
+int game_close(t_game *game);
+int game_keys(int key, void *param);
 
 // errors
 void		error_exit(char *msg);

@@ -17,7 +17,7 @@ SRC = so_long.c \
 src/ft_erros.c \
 src/input/input_validation.c src/input/input_val_utils.c \
 src/input/input_val_utils2.c \
-src/begin_game.c
+src/begin_game.c src/keys_ctrl.c src/moves.c src/window.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
