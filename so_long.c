@@ -20,7 +20,5 @@ int	main(int c, char **v)
 		error_exit("more/less then one parameter");
 	game_map = input_validation(v[1]);
 	begin_game(game_map);
-	printf("PASS\n");
-	exit(0);
+	return (0);
 }
-// run on key press

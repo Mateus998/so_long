@@ -48,27 +48,51 @@ void move(t_game *game, int y, int x, char m)
     render_image(game);
 }
 
-int game_keys(int key, void *param)
+int key_loop(void *param)
 {
     t_game *game;
+    static int delay;
 
     game = (t_game *)param;
+    delay++;
+    if (delay >= DELAY)
+    {
+        if (game->key_w)
+            move(game, game->map->playery - 1, game->map->playerx, 'w');
+        else if (game->key_a)
+            move(game, game->map->playery, game->map->playerx - 1, 'a');
+        else if (game->key_s)
+            move(game, game->map->playery + 1, game->map->playerx, 's');
+        else if (game->key_d)
+            move(game, game->map->playery, game->map->playerx + 1, 'd');
+        delay = 0;
+    }
+    return (0);
+}
+int key_press(int key, t_game *game)
+{
     if (key == 65307)
         game_close(game);
     else if (key == 119)
-        move(game, game->map->playery - 1, game->map->playerx, 'w');
+        game->key_w = 1;
     else if (key == 97)
-        move(game, game->map->playery, game->map->playerx - 1, 'a');
+        game->key_a = 1;
     else if (key == 115)
-        move(game, game->map->playery + 1, game->map->playerx, 's');
+        game->key_s = 1;
     else if (key == 100)
-        move(game, game->map->playery, game->map->playerx + 1, 'd');
+        game->key_d = 1;
     return (0);
 }
 
-int game_close(t_game *game)
+int key_release(int key, t_game *game)
 {
-	free_game(game);
-    exit(0);
-	return (0);
+    if (key == 119)
+        game->key_w = 0;
+    else if (key == 97)
+        game->key_a = 0;
+    else if (key == 115)
+        game->key_s = 0;
+    else if (key == 100)
+        game->key_d = 0;
+    return (0);
 }

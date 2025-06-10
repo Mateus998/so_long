@@ -55,6 +55,8 @@ typedef struct s_game
 	int key_d;
 }			t_game;
 
+#define DELAY 2000
+
 // game
 void begin_game(t_map *game);
 
@@ -65,7 +67,9 @@ void exit_window(t_game *game);
 
 // controls
 int game_close(t_game *game);
-int game_keys(int key, void *param);
+int key_loop(void *param);
+int key_release(int key, t_game *game);
+int key_press(int key, t_game *game);
 
 // exits
 void		error_exit(char *msg);

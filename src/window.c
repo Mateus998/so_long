@@ -88,9 +88,9 @@ void file_to_image(t_game *game)
     win->player_a = mlx_xpm_file_to_image(game->init, "assets/left.xpm", &w, &h);
     win->player_s = mlx_xpm_file_to_image(game->init, "assets/down.xpm", &w, &h);
     win->player_d = mlx_xpm_file_to_image(game->init, "assets/right.xpm", &w, &h);
+    game->win = win;
     if (!win->collect || !win->floor || !win->player_s || !win->portal_off || !win->portal_on ||
          !win->portal_p || !win->wall || !win->player_a || !win->player_d || !win->player_w)
         if (free_game(game))
             error_exit("images not correctly loaded");
-    game->win = win;
 }
