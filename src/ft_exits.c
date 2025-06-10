@@ -19,24 +19,28 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
-void free_map(t_slong *map, char *msg)
+int free_map(t_slong *map)
 {
 	free_matrix(map->map);
 	free(map);
-	error_exit(msg);
+	return (1);
 }
 
-void free_game(t_game *game, char *msg, int error)
+int free_game(t_game *game)
 {
+	if (!game)
+		return (1);
 	if (game->map)
-		free_matrix(game->map->map);
-	free(game->map);
+		free_map(game->map);
 	if (game->win)
-		free(game->win);
+		exit_window(game);
+	if (game->init)
+	{
+		mlx_destroy_display(game->init);
+		free(game->init);
+	}
 	free(game);
-	if (error)
-		error_exit(msg);
-	exit(0);
+	return (1);
 }
 
 int	free_get_next_line(char *map, char *line)

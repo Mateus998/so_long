@@ -58,23 +58,26 @@ void	player_position(t_slong *game)
 	game->playery = y;
 }
 
-void	collectibles_count(t_slong *game)
+void	collect_exit_info(t_slong *game)
 {
-	char	**mtx;
 	int		y;
 	int		x;
 	int		count;
 
 	count = 0;
-	mtx = game->map;
 	y = 0;
-	while (mtx[y])
+	while (game->map[y])
 	{
 		x = 0;
-		while (mtx[y][x])
+		while (game->map[y][x])
 		{
-			if (mtx[y][x] == 'C')
+			if (game->map[y][x] == 'C')
 				count++;
+			if (game->map[y][x] == 'E')
+			{
+				game->exitx = x;
+				game->exity = y;
+			}
 			x++;
 		}
 		y++;
@@ -88,10 +91,11 @@ void	valid_path_check(t_slong *game, int size)
 
 	mtx_cpy = copy_matrix(game->map, size);
 	player_position(game);
-	collectibles_count(game);
+	collect_exit_info(game);
 	if (!flood_fill_check(mtx_cpy, game->playery, game->playerx, game->collect))
 		if (free_matrix(mtx_cpy))
-			free_map(game, "no valid path");
+			if (free_map(game))
+				error_exit("no valid path");
 	free_matrix(mtx_cpy);
 }
 

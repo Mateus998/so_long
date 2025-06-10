@@ -23,6 +23,8 @@ typedef struct s_slong
 	int		collect;
 	int		playerx;
 	int		playery;
+	int exitx;
+	int exity;
 	int width;
 	int height;
 }			t_slong;
@@ -52,23 +54,18 @@ void begin_game(t_slong *game);
 // window
 void render_image(t_game *game);
 void file_to_image(t_game *game);
-
-// moves
-void move_up(t_game *game);
-void move_down(t_game *game);
-void move_left(t_game *game);
-void move_right(t_game *game);
+void exit_window(t_game *game);
 
 // controls
 int game_close(t_game *game);
 int game_keys(int key, void *param);
 
-// errors
+// exits
 void		error_exit(char *msg);
 int			free_get_next_line(char *map, char *line);
 int			free_matrix(char **mtrx);
-void free_game(t_game *game, char *msg, int error);
-void free_map(t_slong *map, char *msg);
+int free_game(t_game *game);
+int free_map(t_slong *map);
 
 // input
 t_slong		*input_validation(char *map);
