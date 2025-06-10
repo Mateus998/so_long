@@ -1,6 +1,6 @@
 #include "../so_long.h"
 
-void begin_game(t_slong *map)
+void begin_game(t_map *map)
 {
     t_game *game;
 

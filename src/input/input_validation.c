@@ -33,7 +33,7 @@ int	flood_fill_check(char **mtx, int y, int x, int collect)
 	return (0);
 }
 
-void	player_position(t_slong *game)
+void	player_position(t_map *game)
 {
 	char	**mtx;
 	int		y;
@@ -58,7 +58,7 @@ void	player_position(t_slong *game)
 	game->playery = y;
 }
 
-void	collect_exit_info(t_slong *game)
+void	collect_exit_info(t_map *game)
 {
 	int		y;
 	int		x;
@@ -85,7 +85,7 @@ void	collect_exit_info(t_slong *game)
 	game->collect = count;
 }
 
-void	valid_path_check(t_slong *game, int size)
+void	valid_path_check(t_map *game, int size)
 {
 	char	**mtx_cpy;
 
@@ -99,19 +99,19 @@ void	valid_path_check(t_slong *game, int size)
 	free_matrix(mtx_cpy);
 }
 
-t_slong	*input_validation(char *map)
+t_map	*input_validation(char *map)
 {
-	t_slong	*game;
+	t_map	*game_map;
 
 	map_char_check(map);
 	format_check(map);
-	game = malloc(sizeof(t_slong));
-	if (!game)
+	game_map = malloc(sizeof(t_map));
+	if (!game_map)
 		error_exit("game struct allocation error");
-	game->height = line_count(map);
-	walls_check(map, game->height);
-	game->map = matrix_creation(map);
-	valid_path_check(game, game->height);
-	game->width = sl_strlen(game->map[0]);
-	return (game);
+	game_map->height = line_count(map);
+	walls_check(map, game_map->height);
+	game_map->map = matrix_creation(map);
+	valid_path_check(game_map, game_map->height);
+	game_map->width = sl_strlen(game_map->map[0]);
+	return (game_map);
 }

@@ -17,7 +17,7 @@
 # include "minilibx/mlx.h"
 # include "minilibx/mlx_int.h"
 
-typedef struct s_slong
+typedef struct s_map
 {
 	char	**map;
 	int		collect;
@@ -27,7 +27,7 @@ typedef struct s_slong
 	int exity;
 	int width;
 	int height;
-}			t_slong;
+}			t_map;
 
 typedef struct s_win
 {
@@ -37,19 +37,26 @@ typedef struct s_win
 	void *portal_on;
 	void *portal_off;
 	void *portal_p;
-	void *player;
+	void *player_w;
+	void *player_a;
+	void *player_s;
+	void *player_d;
 } t_win;
 
 typedef struct s_game
 {
-	struct s_slong	*map;
+	struct s_map	*map;
 	struct s_win *win;
 	void *init;
 	void *window;
+	int key_w;
+	int key_a;
+	int key_s;
+	int key_d;
 }			t_game;
 
 // game
-void begin_game(t_slong *game);
+void begin_game(t_map *game);
 
 // window
 void render_image(t_game *game);
@@ -65,10 +72,11 @@ void		error_exit(char *msg);
 int			free_get_next_line(char *map, char *line);
 int			free_matrix(char **mtrx);
 int free_game(t_game *game);
-int free_map(t_slong *map);
+int free_map(t_map *map);
+int game_close(t_game *game);
 
 // input
-t_slong		*input_validation(char *map);
+t_map		*input_validation(char *map);
 int			file_reading(char *map, char **line);
 void		format_check(char *map);
 int			sl_strlen(char *str);
@@ -80,8 +88,8 @@ char		*player_exit_count(char c);
 void		map_char_check(char *map);
 char		**copy_matrix(char **mtx, int size);
 int			flood_fill_check(char **mtx, int y, int x, int collect);
-void		player_position(t_slong *game);
-void		collectibles_count(t_slong *game);
-void		valid_path_check(t_slong *game, int size);
+void		player_position(t_map *game);
+void		collectibles_count(t_map *game);
+void		valid_path_check(t_map *game, int size);
 
 #endif

@@ -19,7 +19,7 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
-int free_map(t_slong *map)
+int free_map(t_map *map)
 {
 	free_matrix(map->map);
 	free(map);

@@ -14,13 +14,13 @@
 
 int	main(int c, char **v)
 {
-	t_slong	*game;
+	t_map	*game_map;
 
 	if (c != 2)
 		error_exit("more/less then one parameter");
-	game = input_validation(v[1]);
-	begin_game(game);
+	game_map = input_validation(v[1]);
+	begin_game(game_map);
 	printf("PASS\n");
 	exit(0);
 }
-// move count on shell
+// run on key press
