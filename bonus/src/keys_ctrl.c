@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:10 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 15:39:55 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:19:28 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	move(t_game *game, int y, int x, char m)
 {
 	int			event;
 	static int	moves;
+	char *move_str;
 
 	event = 0;
 	if (game->map->map[y][x] == '1')
@@ -55,10 +56,14 @@ void	move(t_game *game, int y, int x, char m)
 	game->event = event;
 	move_control(game, y, x, m);
 	render_image(game);
-	moves++;
-	ft_printf("%i\n", moves);
 	game->map->playery = y;
 	game->map->playerx = x;
+	moves++;
+	move_str = ft_itoa(moves);
+	if (!move_str)
+		if (free_game(game))
+			error_exit("move_str allocation error");
+	mlx_string_put(game->init, game->window, 10, 10, 0xFFFFFF, move_str);
 }
 
 int	key_loop(void *param)

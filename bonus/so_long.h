@@ -6,16 +6,16 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 14:02:02 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:26:00 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "minilibx/mlx_int.h"
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "../minilibx/mlx_int.h"
 
 typedef struct s_map
 {
