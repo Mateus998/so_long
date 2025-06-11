@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_erros.c                                         :+:      :+:    :+:   */
+/*   ft_exits.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:35:02 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/06 18:18:16 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 10:40:35 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
-int free_map(t_map *map)
+int	free_map(t_map *map)
 {
 	free_matrix(map->map);
 	free(map);
 	return (1);
 }
 
-int free_game(t_game *game)
+int	free_game(t_game *game)
 {
 	if (!game)
 		return (1);
@@ -53,7 +53,7 @@ int	free_get_next_line(char *map, char *line)
 
 int	free_matrix(char **mtrx)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (mtrx)

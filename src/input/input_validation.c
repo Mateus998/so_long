@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:15 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/06 18:54:25 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:40:27 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	player_position(t_map *game)
 
 void	collect_exit_info(t_map *game)
 {
-	int		y;
-	int		x;
-	int		count;
+	int	y;
+	int	x;
+	int	count;
 
 	count = 0;
 	y = 0;
@@ -102,14 +102,16 @@ void	valid_path_check(t_map *game, int size)
 t_map	*input_validation(char *map)
 {
 	t_map	*game_map;
+	int total_lines;
 
 	map_char_check(map);
 	format_check(map);
+	total_lines = line_count(map);
+	walls_check(map, total_lines);
 	game_map = malloc(sizeof(t_map));
 	if (!game_map)
 		error_exit("game struct allocation error");
-	game_map->height = line_count(map);
-	walls_check(map, game_map->height);
+	game_map->height = total_lines;
 	game_map->map = matrix_creation(map);
 	valid_path_check(game_map, game_map->height);
 	game_map->width = sl_strlen(game_map->map[0]);

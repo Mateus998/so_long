@@ -6,7 +6,7 @@
 #    By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/03 10:32:03 by mateferr          #+#    #+#              #
-#    Updated: 2025/06/06 18:27:42 by mateferr         ###   ########.fr        #
+#    Updated: 2025/06/11 10:43:58 by mateferr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MINILIBX = minilibx
 SRC = so_long.c \
 src/ft_exits.c \
 src/input/input_validation.c src/input/input_val_utils.c \
-src/input/input_val_utils2.c \
+src/input/input_val_utils2.c src/window2.c \
 src/begin_game.c src/keys_ctrl.c src/window.c
 OBJ = $(SRC:.c=.o)
 

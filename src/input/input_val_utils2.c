@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 11:53:29 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/06 18:53:39 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:32:03 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	map_char_check(char *map)
 	char	*res;
 
 	line = NULL;
-	while (file_reading(map, &line))
+	if (!file_reading(map, &line))
+		error_exit("empty map");
+	while (line)
 	{
 		i = 0;
 		while (line[i])
@@ -70,6 +72,7 @@ void	map_char_check(char *map)
 			res = player_exit_count(line[i]);
 			i++;
 		}
+		file_reading(map, &line);
 	}
 	if (res)
 		error_exit(res);
