@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:09:54 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:00:45 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "minilibx/mlx_int.h"
+// # include "minilibx/mlx.h"
+// # include "minilibx/mlx_int.h"
 
 typedef struct s_map
 {
@@ -53,6 +53,7 @@ typedef struct s_game
 	int				key_a;
 	int				key_s;
 	int				key_d;
+	int				event;
 }					t_game;
 
 // game
@@ -72,7 +73,7 @@ int					game_close(t_game *game);
 int					key_loop(void *param);
 int					key_release(int key, t_game *game);
 int					key_press(int key, t_game *game);
-void				move_control(t_game *game, int event, int y, int x, char m);
+void				move_control(t_game *game, int y, int x, char m);
 void				move(t_game *game, int y, int x, char m);
 
 // exits

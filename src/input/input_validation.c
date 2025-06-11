@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:15 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:40:27 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:05:04 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	valid_path_check(t_map *game, int size)
 t_map	*input_validation(char *map)
 {
 	t_map	*game_map;
-	int total_lines;
+	int		total_lines;
 
 	map_char_check(map);
 	format_check(map);

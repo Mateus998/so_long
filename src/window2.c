@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:31:21 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:06:02 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:04:17 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	put_image_player(t_game *game, int y, int x)
 
 void	file_to_image_player(t_game *game)
 {
-	int	w;
-	int	h;
-    t_win *win;
+	int		w;
+	int		h;
+	t_win	*win;
 
-    win = game->win;
+	win = game->win;
 	win->portal_p = mlx_xpm_file_to_image(game->init,
 			"assets/portal_player.xpm", &w, &h);
 	win->player_w = mlx_xpm_file_to_image(game->init, "assets/up.xpm", &w, &h);

@@ -6,13 +6,13 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:10 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:10:31 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:05:27 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	move_control(t_game *game, int event, int y, int x, char m)
+void	move_control(t_game *game, int y, int x, char m)
 {
 	if (game->map->map[game->map->playery][game->map->playerx] == 'G')
 		game->map->map[game->map->playery][game->map->playerx] = 'E';
@@ -26,15 +26,15 @@ void	move_control(t_game *game, int event, int y, int x, char m)
 		game->map->map[y][x] = 'P';
 	else if (m == 'd')
 		game->map->map[y][x] = 'D';
-	if (event == 1)
+	if (game->event == 1)
 	{
 		game->map->collect--;
 		if (!game->map->collect)
 			game->map->map[game->map->exity][game->map->exitx] = 'F';
 	}
-	else if (event == 2)
+	else if (game->event == 2)
 		game->map->map[y][x] = 'G';
-	else if (event == 3)
+	else if (game->event == 3)
 		game_close(game);
 }
 
@@ -52,7 +52,8 @@ void	move(t_game *game, int y, int x, char m)
 		event = 2;
 	else if (game->map->map[y][x] == 'F')
 		event = 3;
-	move_control(game, event, y, x, m);
+	game->event = event;
+	move_control(game, y, x, m);
 	moves++;
 	ft_printf("%i\n", moves);
 	game->map->playery = y;
