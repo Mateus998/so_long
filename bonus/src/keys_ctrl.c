@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:10 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 16:19:28 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:33:53 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,7 @@ void	move_control(t_game *game, int y, int x, char m)
 		game->map->map[game->map->playery][game->map->playerx] = 'E';
 	else
 		game->map->map[game->map->playery][game->map->playerx] = '0';
-	if (m == 'w')
-		game->map->map[y][x] = 'W';
-	else if (m == 'a')
-		game->map->map[y][x] = 'A';
-	else if (m == 's')
-		game->map->map[y][x] = 'P';
-	else if (m == 'd')
-		game->map->map[y][x] = 'D';
+	game->map->map[y][x] = m;
 	if (game->event == 1)
 	{
 		game->map->collect--;
@@ -34,26 +27,24 @@ void	move_control(t_game *game, int y, int x, char m)
 	}
 	else if (game->event == 2)
 		game->map->map[y][x] = 'G';
-	else if (game->event == 3)
+	else if (game->event == 3 || game->event == 4)
+	{
+		if (game->event == 4)
+			ft_printf("you lose\n");
+		else
+			ft_printf("you win\n");
 		game_close(game);
+	}
 }
 
 void	move(t_game *game, int y, int x, char m)
 {
-	int			event;
 	static int	moves;
-	char *move_str;
+	char		*move_str;
 
-	event = 0;
 	if (game->map->map[y][x] == '1')
 		return ;
-	else if (game->map->map[y][x] == 'C')
-		event = 1;
-	else if (game->map->map[y][x] == 'E')
-		event = 2;
-	else if (game->map->map[y][x] == 'F')
-		event = 3;
-	game->event = event;
+	game->event = move_event(game->map->map, y, x);
 	move_control(game, y, x, m);
 	render_image(game);
 	game->map->playery = y;
@@ -64,6 +55,7 @@ void	move(t_game *game, int y, int x, char m)
 		if (free_game(game))
 			error_exit("move_str allocation error");
 	mlx_string_put(game->init, game->window, 10, 10, 0xFFFFFF, move_str);
+	free(move_str);
 }
 
 int	key_loop(void *param)
@@ -76,13 +68,14 @@ int	key_loop(void *param)
 	if (delay >= 8000)
 	{
 		if (game->key_w)
-			move(game, game->map->playery - 1, game->map->playerx, 'w');
+			move(game, game->map->playery - 1, game->map->playerx, 'W');
 		else if (game->key_a)
-			move(game, game->map->playery, game->map->playerx - 1, 'a');
+			move(game, game->map->playery, game->map->playerx - 1, 'A');
 		else if (game->key_s)
-			move(game, game->map->playery + 1, game->map->playerx, 's');
+			move(game, game->map->playery + 1, game->map->playerx, 'P');
 		else if (game->key_d)
-			move(game, game->map->playery, game->map->playerx + 1, 'd');
+			move(game, game->map->playery, game->map->playerx + 1, 'D');
+		sprite_animation(game);
 		delay = 0;
 	}
 	return (0);

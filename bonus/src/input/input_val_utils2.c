@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 11:53:29 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:32:03 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:34:06 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,9 @@ void	map_char_check(char *map)
 		i = 0;
 		while (line[i])
 		{
-			if (line[i] != '0' && line[i] != '1' && line[i] != '\n')
-			{
-				if (line[i] != 'P' && line[i] != 'C' && line[i] != 'E')
-					if (free_get_next_line(map, line))
-						error_exit("invalid char detected");
-			}
+			if (!validate_char(line[i]))
+				if (free_get_next_line(map, line))
+					error_exit("invalid char detected");
 			res = player_exit_count(line[i]);
 			i++;
 		}

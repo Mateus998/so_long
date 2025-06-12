@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:39:55 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:07:07 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:33:43 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	exit_window(t_game *game)
 		mlx_destroy_image(game->init, game->win->portal_p);
 	if (game->win->wall)
 		mlx_destroy_image(game->init, game->win->wall);
+	if (game->win->enemy)
+		mlx_destroy_image(game->init, game->win->enemy);
 	mlx_destroy_window(game->init, game->window);
 	free(game->win);
 }
@@ -52,9 +54,12 @@ void	put_image(t_game *game, int y, int x)
 	else if (game->map->map[y][x] == 'E')
 		mlx_put_image_to_window(game->init, game->window, game->win->portal_off,
 			x * 64, y * 64);
-	else if (game->map->map[y][x] == 'F')
-		mlx_put_image_to_window(game->init, game->window, game->win->portal_on,
-			x * 64, y * 64);
+	// else if (game->map->map[y][x] == 'F')
+	// 	mlx_put_image_to_window(game->init, game->window, game->win->portal_on,
+	// x * 64, y * 64);
+	else if (game->map->map[y][x] == 'e')
+		mlx_put_image_to_window(game->init, game->window, game->win->enemy, x
+			* 64, y * 64);
 }
 
 void	render_image(t_game *game)
@@ -94,6 +99,13 @@ void	file_to_image(t_game *game)
 			&w, &h);
 	win->portal_on = mlx_xpm_file_to_image(game->init, "assets/portal_on.xpm",
 			&w, &h);
+	win->enemy = mlx_xpm_file_to_image(game->init, "assets/portal_player.xpm",
+			&w, &h);
 	game->win = win;
-	file_to_image_player(game);
+	file_to_image_player(game, w, h);
+	if (!win->collect || !win->floor || !win->player_s || !win->portal_off
+		|| !win->portal_on || !win->portal_p || !win->wall || !win->player_a
+		|| !win->player_d || !win->player_w || !win->enemy)
+		if (free_game(game))
+			error_exit("images not correctly loaded");
 }

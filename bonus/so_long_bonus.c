@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:58:49 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 16:42:16 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:35:40 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ int	main(int c, char **v)
 	begin_game(game_map);
 	return (0);
 }
-//mecanicas inimigo
-//animacao portal
+//criar sprites inimigo e animacao portal

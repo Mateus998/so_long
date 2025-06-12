@@ -6,17 +6,43 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:43 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 15:38:21 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:34:02 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+int	validate_char(char c)
+{
+	if (c != '0' && c != '1' && c != '\n')
+	{
+		if (c != 'P' && c != 'C' && c != 'E' && c != 'e')
+			return (0);
+	}
+	return (1);
+}
 
 int	game_close(t_game *game)
 {
 	free_game(game);
 	exit(0);
 	return (0);
+}
+
+int	move_event(char **map, int y, int x)
+{
+	int	event;
+
+	event = 0;
+	if (map[y][x] == 'C')
+		event = 1;
+	else if (map[y][x] == 'E')
+		event = 2;
+	else if (map[y][x] == 'F')
+		event = 3;
+	else if (map[y][x] == 'e')
+		event = 4;
+	return (event);
 }
 
 void	begin_game(t_map *map)

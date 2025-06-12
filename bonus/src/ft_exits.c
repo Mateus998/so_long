@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:35:02 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 10:40:35 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:48:55 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	free_game(t_game *game)
 {
 	if (!game)
 		return (1);
+	if (game->anim)
+		free_anim(game);
 	if (game->map)
 		free_map(game->map);
 	if (game->win)
