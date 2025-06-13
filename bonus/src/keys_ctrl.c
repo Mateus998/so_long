@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:10 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/12 18:33:53 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:40:21 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	move_control(t_game *game, int y, int x, char m)
 {
-	if (game->map->map[game->map->playery][game->map->playerx] == 'G')
-		game->map->map[game->map->playery][game->map->playerx] = 'E';
-	else
-		game->map->map[game->map->playery][game->map->playerx] = '0';
+	game->map->map[game->map->playery][game->map->playerx] = '0';
 	game->map->map[y][x] = m;
 	if (game->event == 1)
 	{
@@ -25,14 +22,12 @@ void	move_control(t_game *game, int y, int x, char m)
 		if (!game->map->collect)
 			game->map->map[game->map->exity][game->map->exitx] = 'F';
 	}
-	else if (game->event == 2)
-		game->map->map[y][x] = 'G';
 	else if (game->event == 3 || game->event == 4)
 	{
 		if (game->event == 4)
-			ft_printf("you lose\n");
+			ft_printf("YOU LOSE\n");
 		else
-			ft_printf("you win\n");
+			ft_printf("YOU WIN\n");
 		game_close(game);
 	}
 }
@@ -42,7 +37,7 @@ void	move(t_game *game, int y, int x, char m)
 	static int	moves;
 	char		*move_str;
 
-	if (game->map->map[y][x] == '1')
+	if (game->map->map[y][x] == '1' || game->map->map[y][x] == 'E')
 		return ;
 	game->event = move_event(game->map->map, y, x);
 	move_control(game, y, x, m);
@@ -52,13 +47,12 @@ void	move(t_game *game, int y, int x, char m)
 	moves++;
 	move_str = ft_itoa(moves);
 	if (!move_str)
-		if (free_game(game))
-			error_exit("move_str allocation error");
+		free_game(game, "move_str allocation error");
 	mlx_string_put(game->init, game->window, 10, 10, 0xFFFFFF, move_str);
 	free(move_str);
 }
 
-int	key_loop(void *param)
+int	game_loop(void *param)
 {
 	t_game		*game;
 	static int	delay;

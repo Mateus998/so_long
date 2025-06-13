@@ -6,7 +6,7 @@
 #    By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/03 10:32:03 by mateferr          #+#    #+#              #
-#    Updated: 2025/06/11 16:29:11 by mateferr         ###   ########.fr        #
+#    Updated: 2025/06/13 14:45:55 by mateferr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ OBJ = $(SRC:.c=.o)
 BSRC = bonus/so_long_bonus.c \
 bonus/src/ft_exits.c \
 bonus/src/input/input_validation.c bonus/src/input/input_val_utils.c \
-bonus/src/input/input_val_utils2.c bonus/src/window2.c \
-bonus/src/begin_game.c bonus/src/keys_ctrl.c bonus/src/window.c
+bonus/src/input/input_val_utils2.c bonus/src/window_player.c \
+bonus/src/begin_game.c bonus/src/keys_ctrl.c bonus/src/window.c \
+bonus/src/window_anim.c
 BOBJ = $(BSRC:.c=.o)
 
 CC = cc

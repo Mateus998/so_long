@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:10 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 15:39:55 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:17:27 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	move_control(t_game *game, int y, int x, char m)
 	else if (game->event == 2)
 		game->map->map[y][x] = 'G';
 	else if (game->event == 3)
+	{
+		ft_printf("YOU WIN\n");
 		game_close(game);
+	}
 }
 
 void	move(t_game *game, int y, int x, char m)
@@ -61,7 +64,7 @@ void	move(t_game *game, int y, int x, char m)
 	game->map->playerx = x;
 }
 
-int	key_loop(void *param)
+int	game_loop(void *param)
 {
 	t_game		*game;
 	static int	delay;

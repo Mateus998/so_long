@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:15 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 12:05:04 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:09:04 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ int	flood_fill_check(char **mtx, int y, int x, int collect)
 	static int	c;
 	static int	e;
 
-	if (mtx[y][x] == '1')
+	if (mtx[y][x] == '1' || mtx[y][x] == 'e')
 		return (0);
 	if (mtx[y][x] == 'E')
+	{
 		e++;
+		mtx[y][x] = '1';
+		return (0);
+	}
 	else if (mtx[y][x] == 'C')
 		c++;
 	mtx[y][x] = '1';

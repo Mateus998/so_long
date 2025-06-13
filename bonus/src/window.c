@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:39:55 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/12 18:33:43 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:12:32 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,10 @@ void	exit_window(t_game *game)
 		mlx_destroy_image(game->init, game->win->player_d);
 	if (game->win->player_w)
 		mlx_destroy_image(game->init, game->win->player_w);
-	if (game->win->portal_off)
-		mlx_destroy_image(game->init, game->win->portal_off);
-	if (game->win->portal_on)
-		mlx_destroy_image(game->init, game->win->portal_on);
 	if (game->win->portal_p)
 		mlx_destroy_image(game->init, game->win->portal_p);
 	if (game->win->wall)
 		mlx_destroy_image(game->init, game->win->wall);
-	if (game->win->enemy)
-		mlx_destroy_image(game->init, game->win->enemy);
 	mlx_destroy_window(game->init, game->window);
 	free(game->win);
 }
@@ -50,15 +44,6 @@ void	put_image(t_game *game, int y, int x)
 			* 64, y * 64);
 	else if (game->map->map[y][x] == 'C')
 		mlx_put_image_to_window(game->init, game->window, game->win->collect, x
-			* 64, y * 64);
-	else if (game->map->map[y][x] == 'E')
-		mlx_put_image_to_window(game->init, game->window, game->win->portal_off,
-			x * 64, y * 64);
-	// else if (game->map->map[y][x] == 'F')
-	// 	mlx_put_image_to_window(game->init, game->window, game->win->portal_on,
-	// x * 64, y * 64);
-	else if (game->map->map[y][x] == 'e')
-		mlx_put_image_to_window(game->init, game->window, game->win->enemy, x
 			* 64, y * 64);
 }
 
@@ -83,29 +68,20 @@ void	render_image(t_game *game)
 
 void	file_to_image(t_game *game)
 {
-	t_win	*win;
-	int		w;
-	int		h;
+	int	w;
+	int	h;
 
-	win = malloc(sizeof(t_win));
-	if (!win)
-		if (free_game(game))
-			error_exit("t_win allocaion error");
-	win->floor = mlx_xpm_file_to_image(game->init, "assets/grass.xpm", &w, &h);
-	win->wall = mlx_xpm_file_to_image(game->init, "assets/stone.xpm", &w, &h);
-	win->collect = mlx_xpm_file_to_image(game->init, "assets/collect.xpm", &w,
+	game->win = malloc(sizeof(t_win));
+	if (!game->win)
+		free_game(game, "t_win allocaion error");
+	game->win->floor = mlx_xpm_file_to_image(game->init, "assets/grass.xpm", &w,
 			&h);
-	win->portal_off = mlx_xpm_file_to_image(game->init, "assets/portal_off.xpm",
+	game->win->wall = mlx_xpm_file_to_image(game->init, "assets/stone.xpm", &w,
+			&h);
+	game->win->collect = mlx_xpm_file_to_image(game->init, "assets/collect.xpm",
 			&w, &h);
-	win->portal_on = mlx_xpm_file_to_image(game->init, "assets/portal_on.xpm",
-			&w, &h);
-	win->enemy = mlx_xpm_file_to_image(game->init, "assets/portal_player.xpm",
-			&w, &h);
-	game->win = win;
+	if (!game->win->collect || !game->win->floor || !game->win->wall)
+		free_game(game, "images not correctly loaded");
 	file_to_image_player(game, w, h);
-	if (!win->collect || !win->floor || !win->player_s || !win->portal_off
-		|| !win->portal_on || !win->portal_p || !win->wall || !win->player_a
-		|| !win->player_d || !win->player_w || !win->enemy)
-		if (free_game(game))
-			error_exit("images not correctly loaded");
+	file_to_image_animation(game);
 }

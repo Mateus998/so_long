@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 14:02:02 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 12:23:48 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void				file_to_image_player(t_game *game);
 
 // controls
 int					game_close(t_game *game);
-int					key_loop(void *param);
+int					game_loop(void *param);
 int					key_release(int key, t_game *game);
 int					key_press(int key, t_game *game);
 void				move_control(t_game *game, int y, int x, char m);

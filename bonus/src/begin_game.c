@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:43 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/12 18:34:02 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:31:55 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	validate_char(char c)
 
 int	game_close(t_game *game)
 {
-	free_game(game);
+	free_game(game, NULL);
 	exit(0);
 	return (0);
 }
@@ -36,8 +36,6 @@ int	move_event(char **map, int y, int x)
 	event = 0;
 	if (map[y][x] == 'C')
 		event = 1;
-	else if (map[y][x] == 'E')
-		event = 2;
 	else if (map[y][x] == 'F')
 		event = 3;
 	else if (map[y][x] == 'e')
@@ -66,6 +64,6 @@ void	begin_game(t_map *map)
 	mlx_hook(game->window, 17, 0, game_close, game);
 	mlx_hook(game->window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);
-	mlx_loop_hook(game->init, key_loop, game);
+	mlx_loop_hook(game->init, game_loop, game);
 	mlx_loop(game->init);
 }

@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/12 18:19:52 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:15:39 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,9 @@ typedef struct s_map
 
 typedef struct s_win
 {
-	void			*enemy;
 	void			*floor;
 	void			*wall;
 	void			*collect;
-	void			*portal_on;
-	void			*portal_off;
 	void			*portal_p;
 	void			*player_w;
 	void			*player_a;
@@ -44,9 +41,16 @@ typedef struct s_win
 	void			*player_d;
 }					t_win;
 
+typedef struct s_anim
+{
+	struct s_list	*potal_on;
+	struct s_list	*portal_off;
+	struct s_list	*enemy;
+}					t_anim;
+
 typedef struct s_game
 {
-	struct s_list	*anim;
+	struct s_anim	*anim;
 	struct s_map	*map;
 	struct s_win	*win;
 	void			*init;
@@ -62,7 +66,6 @@ typedef struct s_game
 void				begin_game(t_map *game);
 
 // window
-void				sprite_animation(t_game *game);
 void				render_image(t_game *game);
 void				file_to_image(t_game *game);
 void				exit_window(t_game *game);
@@ -70,12 +73,19 @@ void				put_image_player(t_game *game, int y, int x);
 void				put_image(t_game *game, int y, int x);
 void				file_to_image(t_game *game);
 void				file_to_image_player(t_game *game, int w, int h);
-void				file_to_image_anim(t_game *game, int w, int h,
+
+// animations
+void				file_to_image_anim(t_game *game, t_list **anim,
 						char *sprite);
+void				file_to_image_animation(t_game *game);
+void				file_to_image_anim_enemy(t_game *game);
+void				file_to_image_anim_portal_on(t_game *game);
+void				file_to_image_anim_portal_off(t_game *game);
+void				sprite_animation(t_game *game);
+void				enemy_animation(t_game *game);
 
 // controls
-int					game_close(t_game *game);
-int					key_loop(void *param);
+int					game_loop(void *param);
 int					key_release(int key, t_game *game);
 int					key_press(int key, t_game *game);
 void				move_control(t_game *game, int y, int x, char m);
@@ -83,11 +93,11 @@ void				move(t_game *game, int y, int x, char m);
 int					move_event(char **map, int y, int x);
 
 // exits
-void				free_anim(t_game *game);
+void				free_anim(t_game *game, t_list **anim);
 void				error_exit(char *msg);
 int					free_get_next_line(char *map, char *line);
 int					free_matrix(char **mtrx);
-int					free_game(t_game *game);
+void				free_game(t_game *game, char *msg);
 int					free_map(t_map *map);
 int					game_close(t_game *game);
 
