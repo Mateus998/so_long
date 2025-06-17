@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:31:21 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 12:04:17 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:36:25 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void	file_to_image_player(t_game *game)
 	if (!win->collect || !win->floor || !win->player_s || !win->portal_off
 		|| !win->portal_on || !win->portal_p || !win->wall || !win->player_a
 		|| !win->player_d || !win->player_w)
-		if (free_game(game))
-			error_exit("images not correctly loaded");
+		free_game(game, "images not correctly loaded");
 }

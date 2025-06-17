@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:35:02 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 10:40:35 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:34:58 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	free_map(t_map *map)
 	return (1);
 }
 
-int	free_game(t_game *game)
+void	free_game(t_game *game, char *msg)
 {
 	if (!game)
-		return (1);
+		return ;
 	if (game->map)
 		free_map(game->map);
 	if (game->win)
@@ -40,7 +40,8 @@ int	free_game(t_game *game)
 		free(game->init);
 	}
 	free(game);
-	return (1);
+	if (msg)
+		error_exit(msg);
 }
 
 int	free_get_next_line(char *map, char *line)

@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:39:55 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/11 11:07:07 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:36:37 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,33 @@ void	render_image(t_game *game)
 	}
 }
 
+t_win	*create_window(t_game *game)
+{
+	t_win	*window;
+
+	window = malloc(sizeof(t_win));
+	if (!window)
+		free_game(game, "t_win allocaion error");
+	window->collect = NULL;
+	window->floor = NULL;
+	window->player_a = NULL;
+	window->player_d = NULL;
+	window->player_s = NULL;
+	window->player_w = NULL;
+	window->portal_p = NULL;
+	window->wall = NULL;
+	window->portal_off = NULL;
+	window->portal_on = NULL;
+	return (window);
+}
+
 void	file_to_image(t_game *game)
 {
 	t_win	*win;
 	int		w;
 	int		h;
 
-	win = malloc(sizeof(t_win));
-	if (!win)
-		if (free_game(game))
-			error_exit("t_win allocaion error");
+	win = create_window(game);
 	win->floor = mlx_xpm_file_to_image(game->init, "assets/grass.xpm", &w, &h);
 	win->wall = mlx_xpm_file_to_image(game->init, "assets/stone.xpm", &w, &h);
 	win->collect = mlx_xpm_file_to_image(game->init, "assets/collect.xpm", &w,

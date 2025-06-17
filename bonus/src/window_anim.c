@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:41:04 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/13 17:12:11 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:52:58 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	file_to_image_animation(t_game *game)
 	game->anim = malloc(sizeof(t_anim));
 	if (!game->anim)
 		free_game(game, "t_anim allocation error");
+	game->anim->enemy = NULL;
+	game->anim->portal_off = NULL;
+	game->anim->potal_on = NULL;
 	file_to_image_anim_portal_on(game);
 	file_to_image_anim_portal_off(game);
 	file_to_image_anim_enemy(game);
@@ -31,7 +34,10 @@ void	file_to_image_anim(t_game *game, t_list **anim, char *sprite)
 
 	win_sprite = mlx_xpm_file_to_image(game->init, sprite, &w, &h);
 	if (!win_sprite)
+	{
+		free_anim(game, anim);
 		free_game(game, "anim sprite not correctly loaded");
+	}
 	node = ft_lstnew(win_sprite);
 	if (!node)
 		free_game(game, "t_list allocation error");

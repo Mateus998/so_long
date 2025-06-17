@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/13 16:15:39 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:57:48 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_game
 
 // game
 void				begin_game(t_map *game);
+t_game				*create_game(t_map *map);
+t_win				*create_window(t_game *game);
 
 // window
 void				render_image(t_game *game);

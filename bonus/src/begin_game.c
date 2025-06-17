@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:40:43 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/13 16:31:55 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:48:45 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	move_event(char **map, int y, int x)
 	return (event);
 }
 
-void	begin_game(t_map *map)
+t_game	*create_game(t_map *map)
 {
 	t_game	*game;
 
@@ -51,16 +51,33 @@ void	begin_game(t_map *map)
 	if (!game)
 		if (free_map(map))
 			error_exit("game allocation fail");
-	game->init = mlx_init();
+	game->anim = NULL;
+	game->init = NULL;
 	game->map = map;
-	game->window = mlx_new_window(game->init, map->width * 64, map->height * 64,
-			"so_long");
-	file_to_image(game);
-	render_image(game);
+	game->win = NULL;
+	game->window = NULL;
 	game->key_a = 0;
 	game->key_s = 0;
 	game->key_d = 0;
 	game->key_w = 0;
+	game->event = 0;
+	return (game);
+}
+
+void	begin_game(t_map *map)
+{
+	t_game	*game;
+
+	game = create_game(map);
+	game->init = mlx_init();
+	if (!game->init)
+		free_game(game, "mlx_init error");
+	game->window = mlx_new_window(game->init, map->width * 64, map->height * 64,
+			"so_long");
+	if (!game->window)
+		free_game(game, "malx_window error");
+	file_to_image(game);
+	render_image(game);
 	mlx_hook(game->window, 17, 0, game_close, game);
 	mlx_hook(game->window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);

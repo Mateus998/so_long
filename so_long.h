@@ -6,7 +6,7 @@
 /*   By: mateferr <mateferr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:13:41 by mateferr          #+#    #+#             */
-/*   Updated: 2025/06/13 12:23:48 by mateferr         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:33:12 by mateferr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_game
 
 // game
 void				begin_game(t_map *game);
+t_game				*create_game(t_map *map);
+t_win				*create_window(t_game *game);
 
 // window
 void				render_image(t_game *game);
@@ -80,7 +82,7 @@ void				move(t_game *game, int y, int x, char m);
 void				error_exit(char *msg);
 int					free_get_next_line(char *map, char *line);
 int					free_matrix(char **mtrx);
-int					free_game(t_game *game);
+void				free_game(t_game *game, char *msg);
 int					free_map(t_map *map);
 int					game_close(t_game *game);
 
